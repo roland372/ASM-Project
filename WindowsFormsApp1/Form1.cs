@@ -83,5 +83,37 @@ namespace WindowsFormsApp1
             */
             /*pictureBox1.Image = Properties.Resources.image;*/
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Bitmap copyBitmap = new Bitmap((Bitmap)pictureBox1.Image);
+            ProcessImage(copyBitmap);
+            pictureBox2.Image = copyBitmap;
+
+        }
+
+        public bool ProcessImage(Bitmap bmp)
+        {
+            for (int i =0; i < bmp.Width; ++i)
+                {
+                for (int j =0; j < bmp.Height; ++j)
+                {
+                    Color bmpColor = bmp.GetPixel(i, j);
+                    int red = bmpColor.R; 
+                    int green = bmpColor.G;
+                    int blue = bmpColor.B;
+                    int gray = (byte)(.299 * red + .587 * green + .114 * blue);
+                    red = gray;
+                    green = gray;
+                    blue = gray;
+
+                    bmp.SetPixel(i, j, Color.FromArgb(red, green, blue));
+
+                  
+                }
+                
+            }
+            return true;
+        }
     }
 }
