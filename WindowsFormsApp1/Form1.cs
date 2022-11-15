@@ -34,8 +34,17 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // <----- Bitmap ----->
+            /* OpenFileDialog openFile = new OpenFileDialog();
+             if (openFile.ShowDialog() == DialogResult.OK)
+             {
+                 pictureBox1.Image = new Bitmap(openFile.FileName);
+             }*/
+            // <----- Bitmap ----->
+
+
             String imageLocation = "";
-            
+
 
             try
             {
@@ -51,7 +60,7 @@ namespace WindowsFormsApp1
                     Image img = Image.FromFile(imageLocation);
                     ImageFormat format = img.RawFormat;
 
-                    var fileSize = new FileInfo(imageLocation).Length / 1024; 
+                    var fileSize = new FileInfo(imageLocation).Length / 1024;
 
                     textBox1.Text = "Image Type : " + format.ToString() + "\r\n" + "Image dimensions: " + img.Width + " x " + img.Height + "\r\n" + "File Size: " + fileSize + "KB";
 
@@ -62,9 +71,9 @@ namespace WindowsFormsApp1
 
                     Console.WriteLine("Image Pixel depth : " + Image.GetPixelFormatSize(img.PixelFormat));
 
-                    /*pictureBox1.Visible = true;*/
+                    pictureBox1.Visible = true;
 
-                    /* pictureBox1.Update();*/
+                    pictureBox1.Update();
 
 
 
@@ -76,12 +85,6 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Error", "Error occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            /*            pictureBox1.Image = Image.FromFile(@"C:\Users\Damian\Desktop\image.png");
-            */
-
-            /*            pictureBox1.Image = Image.FromFile(@"C:\\Users\\Damian\\Desktop\\image.png");
-            */
-            /*pictureBox1.Image = Properties.Resources.image;*/
         }
     }
 }
