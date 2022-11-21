@@ -102,11 +102,8 @@
             this.trackBar1.Maximum = 200;
             this.trackBar1.Minimum = 1;
             this.trackBar1.Name = "trackBar1";
-<<<<<<< HEAD
             this.trackBar1.Size = new System.Drawing.Size(683, 56);
-=======
             this.trackBar1.Size = new System.Drawing.Size(512, 45);
->>>>>>> 8f1e0f23a8aa260bdb26dcc6a5200d85cbafeae7
             this.trackBar1.SmallChange = 5;
             this.trackBar1.TabIndex = 4;
             this.trackBar1.TickFrequency = 10;
@@ -118,11 +115,8 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 94);
             this.label1.Name = "label1";
-<<<<<<< HEAD
             this.label1.Size = new System.Drawing.Size(53, 16);
-=======
             this.label1.Size = new System.Drawing.Size(43, 13);
->>>>>>> 8f1e0f23a8aa260bdb26dcc6a5200d85cbafeae7
             this.label1.TabIndex = 5;
             this.label1.Text = "File info";
             // 
@@ -141,11 +135,8 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(355, 12);
             this.label2.Name = "label2";
-<<<<<<< HEAD
             this.label2.Size = new System.Drawing.Size(94, 16);
-=======
             this.label2.Size = new System.Drawing.Size(73, 13);
->>>>>>> 8f1e0f23a8aa260bdb26dcc6a5200d85cbafeae7
             this.label2.TabIndex = 7;
             this.label2.Text = "Original image";
             // 
@@ -154,11 +145,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(803, 17);
             this.label3.Name = "label3";
-<<<<<<< HEAD
             this.label3.Size = new System.Drawing.Size(115, 16);
-=======
-            this.label3.Size = new System.Drawing.Size(90, 13);
->>>>>>> 8f1e0f23a8aa260bdb26dcc6a5200d85cbafeae7
             this.label3.TabIndex = 8;
             this.label3.Text = "Sharpened image";
             // 
@@ -167,11 +154,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(355, 452);
             this.label4.Name = "label4";
-<<<<<<< HEAD
             this.label4.Size = new System.Drawing.Size(126, 16);
-=======
-            this.label4.Size = new System.Drawing.Size(102, 13);
->>>>>>> 8f1e0f23a8aa260bdb26dcc6a5200d85cbafeae7
             this.label4.TabIndex = 9;
             this.label4.Text = "Sharpening strength";
             // 
@@ -180,11 +163,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(15, 306);
             this.label5.Name = "label5";
-<<<<<<< HEAD
             this.label5.Size = new System.Drawing.Size(122, 16);
-=======
-            this.label5.Size = new System.Drawing.Size(95, 13);
->>>>>>> 8f1e0f23a8aa260bdb26dcc6a5200d85cbafeae7
             this.label5.TabIndex = 10;
             this.label5.Text = "Time measurments";
             // 
@@ -203,11 +182,7 @@
             this.Progress.AutoSize = true;
             this.Progress.Location = new System.Drawing.Point(355, 530);
             this.Progress.Name = "Progress";
-<<<<<<< HEAD
             this.Progress.Size = new System.Drawing.Size(44, 16);
-=======
-            this.Progress.Size = new System.Drawing.Size(35, 13);
->>>>>>> 8f1e0f23a8aa260bdb26dcc6a5200d85cbafeae7
             this.Progress.TabIndex = 12;
             this.Progress.Text = "label6";
             // 
@@ -225,21 +200,8 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-<<<<<<< HEAD
             this.comboBox1.Location = new System.Drawing.Point(1077, 471);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-=======
-            this.comboBox1.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "4",
-            "8",
-            "16",
-            "32",
-            "64"});
-            this.comboBox1.Location = new System.Drawing.Point(808, 383);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
->>>>>>> 8f1e0f23a8aa260bdb26dcc6a5200d85cbafeae7
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(128, 24);
             this.comboBox1.TabIndex = 14;
@@ -250,11 +212,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(1075, 452);
             this.label6.Name = "label6";
-<<<<<<< HEAD
             this.label6.Size = new System.Drawing.Size(58, 16);
-=======
-            this.label6.Size = new System.Drawing.Size(46, 13);
->>>>>>> 8f1e0f23a8aa260bdb26dcc6a5200d85cbafeae7
             this.label6.TabIndex = 15;
             this.label6.Text = "Threads";
             // 
