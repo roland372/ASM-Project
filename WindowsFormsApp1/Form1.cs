@@ -15,6 +15,7 @@ using Image = System.Drawing.Image;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Collections.Specialized;
 
 namespace WindowsFormsApp1
    
@@ -22,30 +23,17 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         static string value = "1";
+        List<double> lista = new List<double>();
+        double sum = 0;
         public Form1()
         {
             InitializeComponent();
-
-
-            /*Bitmap bitmap = new Bitmap("C:\\Users\\Damian\\Desktop\\image.png", true);*/
-
-            /*Image img = new Bitmap(imgPath);*/
-
-            /*pictureBox1.Image = img;*/
 
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // <----- Bitmap ----->
-            /* OpenFileDialog openFile = new OpenFileDialog();
-             if (openFile.ShowDialog() == DialogResult.OK)
-             {
-                 pictureBox1.Image = new Bitmap(openFile.FileName);
-             }*/
-            // <----- Bitmap ----->
-
 
             String imageLocation = "";
 
@@ -53,7 +41,6 @@ namespace WindowsFormsApp1
             try
             {
                 OpenFileDialog dialog = new OpenFileDialog();
-/*                dialog.Filter = "jpg files(.*jpg)|*.jpg| BMP files(.*bmp)|*.bmp| All Files(*.*)|*.*";*/
                 dialog.Filter = "All Files(*.*)|*.*| jpg files(.*jpg)|*.jpg| BMP files(.*bmp)|*.bmp";
 
                 if (dialog.ShowDialog() == DialogResult.OK)
@@ -94,21 +81,28 @@ namespace WindowsFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Bitmap copyBitmap = new Bitmap((Bitmap)pictureBox1.Image);
+            if(pictureBox1.Image != null)
+            {
+                var watch = System.Diagnostics.Stopwatch.StartNew();
+                Bitmap copyBitmap = new Bitmap((Bitmap)pictureBox1.Image);
+                double d1 = double.Parse(value, CultureInfo.InvariantCulture);
 
 
-            /*ProcessImage(copyBitmap);*/
-            /*Convolve(copyBitmap, GaussianBlur(20,20));*/
-            /*ConvolutionFilter(copyBitmap, GaussianBlur(20, 20));*/
-            /*sharp(copyBitmap);*/
+                pictureBox2.Image = SubtractAddFactorImage(copyBitmap, ConvolutionFilter(copyBitmap, GaussianBlur(5, d1)));
 
-            /*pictureBox2.Image = copyBitmap;*/
-            /*pictureBox2.Image = ConvolutionFilter(copyBitmap, GaussianBlur(20, 20));*/
+                watch.Stop();
+                var elapsedMs = watch.ElapsedMilliseconds;
+                lista.Add(elapsedMs * 0.001);
+                sum += elapsedMs * 0.001;
+                textBox2.Text = "stopwatch value : " + elapsedMs * 0.001 + " s\r\nAverage: " + sum / lista.Count;
 
-            double d1 = double.Parse(value, CultureInfo.InvariantCulture);
+            }
+            else
+            {
+                MessageBox.Show("Please select image.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
 
-            pictureBox2.Image = SubtractAddFactorImage(copyBitmap, ConvolutionFilter(copyBitmap, GaussianBlur(5, d1)));
         }
 
         public bool ProcessImage(Bitmap bmp)
@@ -135,89 +129,7 @@ namespace WindowsFormsApp1
             return true;
         }
 
-        /*       public static Bitmap Sharpen(Bitmap image)
-               {
-                   Bitmap sharpenImage = (Bitmap)image.Clone();
 
-                   const int filterWidth = 5;
-                   const int filterHeight = 5;
-                   int width = image.Width;
-                   int height = image.Height;
-
-                   // Create sharpening filter.
-                   double[,] filter = new double[filterWidth, filterHeight] {
-           { -1, -1, -1, -1, -1 },
-           { -1,  2,  2,  2, -1 },
-           { -1,  2,  100,  2, -1 },
-           { -1,  2,  2,  2, -1 },
-           { -1, -1, -1, -1, -1 }
-       };
-
-                   double factor = 1.0 / 100.0;
-                   double bias = 0.0;
-
-                   Color[,] result = new Color[image.Width, image.Height];
-
-                   // Lock image bits for read/write.
-                   BitmapData pbits = sharpenImage.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-
-                   // Declare an array to hold the bytes of the bitmap.
-                   int bytes = pbits.Stride * height;
-                   byte[] rgbValues = new byte[bytes];
-
-                   // Copy the RGB values into the array.
-                   System.Runtime.InteropServices.Marshal.Copy(pbits.Scan0, rgbValues, 0, bytes);
-
-                   int rgb;
-                   // Fill the color array with the new sharpened color values.
-                   for (int x = 0; x < width; ++x)
-                   {
-                       for (int y = 0; y < height; ++y)
-                       {
-                           double red = 0.0, green = 0.0, blue = 0.0;
-
-                           for (int filterX = 0; filterX < filterWidth; filterX++)
-                           {
-                               for (int filterY = 0; filterY < filterHeight; filterY++)
-                               {
-                                   int imageX = (x - filterWidth / 2 + filterX + width) % width;
-                                   int imageY = (y - filterHeight / 2 + filterY + height) % height;
-
-                                   rgb = imageY * pbits.Stride + 3 * imageX;
-
-                                   red += rgbValues[rgb + 2] * filter[filterX, filterY];
-                                   green += rgbValues[rgb + 1] * filter[filterX, filterY];
-                                   blue += rgbValues[rgb + 0] * filter[filterX, filterY];
-                               }
-                               int r = Math.Min(Math.Max((int)(factor * red + bias), 0), 255);
-                               int g = Math.Min(Math.Max((int)(factor * green + bias), 0), 255);
-                               int b = Math.Min(Math.Max((int)(factor * blue + bias), 0), 255);
-
-                               result[x, y] = Color.FromArgb(r, g, b);
-                           }
-                       }
-                   }
-
-                   // Update the image with the sharpened pixels.
-                   for (int x = 0; x < width; ++x)
-                   {
-                       for (int y = 0; y < height; ++y)
-                       {
-                           rgb = y * pbits.Stride + 3 * x;
-
-                           rgbValues[rgb + 2] = result[x, y].R;
-                           rgbValues[rgb + 1] = result[x, y].G;
-                           rgbValues[rgb + 0] = result[x, y].B;
-                       }
-                   }
-
-                   // Copy the RGB values back to the bitmap.
-                   System.Runtime.InteropServices.Marshal.Copy(rgbValues, 0, pbits.Scan0, bytes);
-                   // Release image bits.
-                   sharpenImage.UnlockBits(pbits);
-
-                   return sharpenImage;
-               }*/
         public static Bitmap sharp(Bitmap img)
         {
             Bitmap sharpenImage = new Bitmap(img.Width, img.Height);
@@ -534,7 +446,7 @@ namespace WindowsFormsApp1
 
         public static double[,] GaussianBlur(int lenght, double weight)
         {
-            Console.WriteLine("trackbar value : " + value);
+/*            Console.WriteLine("trackbar value : " + value);*/
             double[,] kernel = new double[lenght, lenght];
             double kernelSum = 0;
             int foff = (lenght - 1) / 2;
@@ -556,7 +468,7 @@ namespace WindowsFormsApp1
                     kernel[y, x] = kernel[y, x] * 1d / kernelSum;
                 }
             }
-            Console.WriteLine("test : " + kernel);
+/*            Console.WriteLine("test : " + kernel);*/
 
             return kernel;
         }
@@ -628,12 +540,17 @@ namespace WindowsFormsApp1
             /*Console.WriteLine("trackbar value : " + trackBar1.Value.ToString());*/
             value = trackBar1.Value.ToString();
 
-            Bitmap copyBitmap = new Bitmap((Bitmap)pictureBox1.Image);
+/*            Bitmap copyBitmap = new Bitmap((Bitmap)pictureBox1.Image);
 
             double d1 = double.Parse(value, CultureInfo.InvariantCulture);
 
-            pictureBox2.Image = SubtractAddFactorImage(copyBitmap, ConvolutionFilter(copyBitmap, GaussianBlur(5, d1)));
+            pictureBox2.Image = SubtractAddFactorImage(copyBitmap, ConvolutionFilter(copyBitmap, GaussianBlur(5, d1)));*/
 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine("Number of threads: " + comboBox1.SelectedItem);
         }
     }
 }
