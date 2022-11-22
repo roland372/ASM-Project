@@ -20,3 +20,4 @@ F:\Visual Studio 2022\source\repos\ASM-Project\ASM-Project\WindowsFormsApp1\obj\
 F:\Visual Studio 2022\source\repos\ASM-Project\ASM-Project\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
 F:\Visual Studio 2022\source\repos\ASM-Project\ASM-Project\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 F:\Visual Studio 2022\source\repos\ASM-Project\ASM-Project\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\Damian\source\repos\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
