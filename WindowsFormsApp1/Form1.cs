@@ -9,6 +9,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Image = System.Drawing.Image;
@@ -16,11 +17,17 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Globalization;
 using System.Collections.Specialized;
+using System.Drawing.Text;
 
 namespace WindowsFormsApp1
 {
+
     public partial class Form1 : Form
     {
+        [DllImport("Dll1.dll")]
+        private unsafe static extern int suma(int a, int b);
+
+
         static string value = "1";
         List<double> lista = new List<double>();
         double sum = 0;
@@ -31,6 +38,9 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+
+
             String imageLocation = "";
 
             try
@@ -105,6 +115,15 @@ namespace WindowsFormsApp1
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Console.WriteLine("Number of threads: " + comboBox1.SelectedItem);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            unsafe
+            {
+                button3.Text = suma(1, 2).ToString();
+
+            }
         }
     }
 }
