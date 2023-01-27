@@ -1,3 +1,4 @@
-﻿     Creating library C:\Users\Damian\source\repos\WindowsFormsApp1\x64\Debug\Dll1.lib and object C:\Users\Damian\source\repos\WindowsFormsApp1\x64\Debug\Dll1.exp
+﻿  Assembling ASM.asm...
+     Creating library C:\Users\Damian\source\repos\WindowsFormsApp1\x64\Debug\Dll1.lib and object C:\Users\Damian\source\repos\WindowsFormsApp1\x64\Debug\Dll1.exp
 Dll1.exp : warning LNK4070: /OUT:ASM.dll directive in .EXP differs from output filename 'C:\Users\Damian\source\repos\WindowsFormsApp1\x64\Debug\Dll1.dll'; ignoring directive
   Dll1.vcxproj -> C:\Users\Damian\source\repos\WindowsFormsApp1\x64\Debug\Dll1.dll
