@@ -7,7 +7,7 @@
 
 SubtractAddFactorImage proc
     mov r10, 0            ;Set the offset pointer to 0
-    mov r11, r8            ;Zapisujemy rozmiar obrazu do zmiennej????nwm czy dziala
+    mov r11, r8            ;Zapisujemy rozmiar obrazu do zmiennej
     mov r12, 0
     mov r13, 0ffffh
     
@@ -23,7 +23,7 @@ SubtractLoop:
     jnz SubtractLoop        ;Jump if there's more
     
     mov r10, 0            ;Set the offset pointer to 0
-    mov r11, r8            ;Zapisujemy rozmiar obrazu do zmiennej????nwm czy dziala
+    mov r11, r8            ;Zapisujemy rozmiar obrazu do zmiennej
 AddLoop:
     mov al, byte ptr[rcx+r10]    ;Read the next byte from original
     mov bl, byte ptr [rdx+r10]     ; Read the next byte from blurred

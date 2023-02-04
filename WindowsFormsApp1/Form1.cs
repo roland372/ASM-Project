@@ -34,6 +34,7 @@ namespace WindowsFormsApp1
         /*        private unsafe static extern byte SubtractAddFactorImage(byte[] bitmap);
         */
 
+        //private unsafe static extern void SubtractAddFactorImage(byte* bmpOriginal, byte* bmpBlur, int imageSizeInBytes, int alphaChannel);
         private unsafe static extern void SubtractAddFactorImage(byte* bmpOriginal, byte* bmpBlur, int imageSizeInBytes);
 
         static string value = "1";
@@ -181,43 +182,21 @@ namespace WindowsFormsApp1
                 Console.WriteLine("1" + copyBitmap.GetType());
 
                 Bitmap subtractValue = UnsharpMaskingLibrary.UnsharpMaskingClass.ConvolutionFilter(copyBitmap, UnsharpMaskingLibrary.UnsharpMaskingClass.GaussianBlur(5, d1));
-                /*byte[] bitmap1 = CopyImageToByteArray(copyBitmap);
-                Console.WriteLine("2" + bitmap1.GetType());
-                byte[] bitmap2 = CopyImageToByteArray(UnsharpMaskingLibrary.UnsharpMaskingClass.ConvolutionFilter(copyBitmap, UnsharpMaskingLibrary.UnsharpMaskingClass.GaussianBlur(5, d1)));
-                byte[] bitmap3 = new byte[copyBitmap.Width * copyBitmap.Height];
-                int imageSizeInBytes = bitmap1.Length;
-
-                int[] intArray = new int[bitmap3.Length / sizeof(int)];
-                byte[] byteArray = new byte[intArray.Length * sizeof(int)];
-                Buffer.BlockCopy(intArray, 0, byteArray, 0, byteArray.Length);*/
 
                 int imageSizeInBytes = (copyBitmap.Width * copyBitmap.Height * 3) / 8;
                 int arrSize = (copyBitmap.Size.Height * copyBitmap.Size.Width) * 4;
 
-
-
-
-
                 BitmapData bitmapData = copyBitmap.LockBits(new Rectangle(0, 0, copyBitmap.Width, copyBitmap.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
                 BitmapData bitmapData2 = subtractValue.LockBits(new Rectangle(0, 0, subtractValue.Width, subtractValue.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-                //bmpOriginal.UnlockBits(bitmapData);
-                //bmpBlur.UnlockBits(bitmapData2);
-
-
 
                 unsafe
                 {
-                    /*fixed (byte* FirstResult = &bitmap1[0])
-                    fixed (byte* SecondResult = &bitmap2[0])
-                    fixed (byte* ThirdResult = &bitmap3[0])
-                    fixed (int* intArrayPtr = &intArray[0])
-                    fixed (byte* byteArr = &byteArray[0])*/
-
                     byte* ptr1 = (byte*)bitmapData.Scan0;
                     byte* ptr2 = (byte*)bitmapData2.Scan0;
 
                     {
-                        //SubtractAddFactorImage(FirstResult, imageSizeInBytes);
+
+                        //SubtractAddFactorImage(ptr1, ptr2, arrSize, 4);
                         SubtractAddFactorImage(ptr1, ptr2, arrSize);
 
                         copyBitmap.UnlockBits(bitmapData);
@@ -232,31 +211,14 @@ namespace WindowsFormsApp1
 
                             pictureBox2.Image = subtractValue;
 
-
-
-                            /*using (MemoryStream mStream = new MemoryStream())
-                            {
-                                mStream.Write(copyBitmap, 0, copyBitmap.Length);
-                                mStream.Position = 0;
-                                Image img = Image.FromStream(mStream);
-
-                            }*/
-
                         }
                         catch (ArgumentException ex)
                         {
-                            // Handle the exception, for example by logging it
-                            //Console.WriteLine(ex.Message);
-                            textBox2.Text = "ERROR : " + ex.Message;
+                            Console.WriteLine(ex.Message);
                         }
 
                     }
                 }
-
-
-
-
-
 
                 watch.Stop();
                 var elapsedMs = watch.ElapsedMilliseconds;
